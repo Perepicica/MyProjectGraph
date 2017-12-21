@@ -26,7 +26,8 @@ public class Gene {
     }
 
     public static boolean isSolution(Gene gene, ArrayList<Integer
-            >[] mVertex, ArrayList<Integer>[] mDistance) { //ПРОВЕРИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            >[] mVertex, ArrayList<Integer>[] mDistance) {
+
         int sum = 0;     // сумма, которая посчитается, если хромосома явдяется хоть каким-нибудь решением(плохим\хорошим)
         int current = 0;             //первая и следующая хромосомы которые участвую в формировании пути(если exists == true)
         int next = 1;

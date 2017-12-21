@@ -3,7 +3,7 @@ package Genetic;
 import java.io.IOException;
 import java.util.*;
 
-public class Genetic {  //методы популяции в популяцию, методы хромосом в хромосомы
+public class Genetic {
 
     private Gene[] population;
     private Random random = new Random();
@@ -13,15 +13,15 @@ public class Genetic {  //методы популяции в популяцию,
     private int begin;
     private int end;
 
-    public Genetic(ArrayList<Integer>[]mVertex1,ArrayList<Integer>[] mDistance1,List<Integer> vertexLisr1, int begin1, int end1){
-        mVertex= mVertex1;
-        mDistance=mDistance1;
-        vertexList=vertexLisr1;
-        begin=begin1;
-        end=end1;
+    public Genetic(ArrayList<Integer>[] mVertex1, ArrayList<Integer>[] mDistance1, List<Integer> vertexLisr1, int begin1, int end1) {
+        mVertex = mVertex1;
+        mDistance = mDistance1;
+        vertexList = vertexLisr1;
+        begin = begin1;
+        end = end1;
     }
 
-    public Pair<List, Integer> mainFunction(){
+    public Pair<List, Integer> mainFunction() {
 
         population = new Gene[(vertexList.size() + 2) * 2];
         int generationsNumber = mVertex.length * 4;
@@ -148,11 +148,15 @@ public class Genetic {  //методы популяции в популяцию,
         return child;
     }
 
-    private void mutation() {  //не один, а процент
+    private void mutation() {
+        int procent = (2 * population.length) / 10;
         int indexGene = random.nextInt(mVertex.length);
-        while (true) {
-            population[indexGene].chromosome[random.nextInt(mVertex.length - 2) + 1].setExistence(random.nextBoolean());
-            if (Gene.isSolution(population[indexGene], mVertex, mDistance)) break;
+        while (procent!=0) {
+            while (true) {
+                population[indexGene].chromosome[random.nextInt(mVertex.length - 2) + 1].setExistence(random.nextBoolean());
+                if (Gene.isSolution(population[indexGene], mVertex, mDistance)) break;
+            }
+            procent--;
         }
     }
 
@@ -180,7 +184,7 @@ public class Genetic {  //методы популяции в популяцию,
     private List<Integer> getWay(Gene gene) {
         List<Integer> way = new LinkedList<>();
         for (int i = 0; i < gene.chromosome.length; i++) {
-           if(gene.chromosome[i].exists()) way.add(gene.chromosome[i].getVertex());
+            if (gene.chromosome[i].exists()) way.add(gene.chromosome[i].getVertex());
         }
         return way;
     }

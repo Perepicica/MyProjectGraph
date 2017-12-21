@@ -56,7 +56,7 @@ public class Beginning {
             }
 
             int i = 1;               //выбираю алгоритм
-            if (n > 15) algoritmType = AlgoritmType.Genetic;
+            if (n > 13) algoritmType = AlgoritmType.Genetic;
             else {
                 while (i < m) {
                     s = lines.get(i + 1);
@@ -88,7 +88,7 @@ public class Beginning {
         } catch (NumberFormatException e) {
             return null;
         } catch (IndexOutOfBoundsException e){
-            throw new IndexOutOfBoundsException("ggvv");
+            throw new IndexOutOfBoundsException();
         }catch (FileNotFoundException e){
             throw new IOException();
         }
@@ -97,6 +97,8 @@ public class Beginning {
             System.out.println("Генетический алгоритм: ");
             Genetic genetic = new Genetic(mVertex, mDistance, vertexList, begin, end);
             result = genetic.mainFunction();
+
+            prn(result);
             return result;
         } else if (algoritmType == AlgoritmType.BellmanFord) {
             System.out.println("Алгоритм Баллмана-Форда:");
@@ -110,5 +112,11 @@ public class Beginning {
             return result;
         }
     }
-
+    private static void prn(Pair<List,Integer> pair){
+        for (int i = 0; i < pair.getVertex().size() ; i++) {
+            System.out.print(pair.getVertex().get(i)+ " ");
+        }
+        System.out.println();
+        System.out.println(pair.exists());
+    }
 }

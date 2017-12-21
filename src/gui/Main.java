@@ -10,25 +10,33 @@ import java.util.List;
 
 public class Main extends JFrame {
     private Input input;
-    private int Width = 200;
-    private int Height = 200;
+    private int Width = 400;
+    private int Height = 400;
+    GraphResult graphResult = new GraphResult(Width, Height);
 
     public Main() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(400, 400);
+        setBounds(100,20,Width,Height);
+    //    setSize(Width, Height);
         input = new Input(Width, Height, this);
+        add(graphResult);
+        graphResult.setVisible(false);
         add(input);
+        repaint();
         setVisible(true);
-
     }
 
     public void getInput(String file) {
         try {
-            if (Beginning.input(file) == null) {                   //если в файле неверно указаны данныe
+            Pair<List, Integer> result = Beginning.input(file);
+            if (result == null) {                   //если в файле неверно указаны данныe
                 JDialog dialog = new Dialog(this, "Проверьте данные в файле");
                 dialog.setVisible(true);
-            }else {
-                Pair<List,Integer> result = Beginning.input(file);
+            } else {
+                graphResult.printGraph(result,DatesForGraph.dates(file));
+                input.setVisible(false);
+                graphResult.setVisible(true);
+                repaint();
             }
         } catch (IndexOutOfBoundsException e) {                    //если файл пустой
             JDialog dialog = new Dialog(this, "Файл пуст");

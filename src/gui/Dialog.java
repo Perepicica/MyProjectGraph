@@ -20,6 +20,7 @@ public class Dialog extends JDialog {
         panel.add(ok);
         panel.setBackground(Color.BLUE);
         add(panel,BorderLayout.SOUTH);
-        setSize(200,160);
+        setBounds(100,20,200,160);
+       // setSize(200,160);
     }
 }
